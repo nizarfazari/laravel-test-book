@@ -12,7 +12,7 @@ class BookController extends Controller
     public function index()
     {
 
-        $books = Book::with('author')->get();
+        $books = Book::with('author')->paginate(10); 
         return view('book.index', compact('books'));
     }
 

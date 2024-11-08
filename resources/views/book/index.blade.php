@@ -56,7 +56,7 @@
                                         </td>
                                         <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                             <form action="{{ route('book.destroy', ['book' => $book->id]) }}" method="POST"
-                                                class="inline">
+                                                class="inline" onsubmit="return confirmDelete()">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit"
@@ -75,5 +75,16 @@
                 </div>
             </div>
         </div>
+
+
+        <div class="mt-4">
+            {{ $books->links() }}
+        </div>
     </div>
+
+    <script>
+        function confirmDelete() {
+            return confirm("Apakah anda yakin akan menghapus buku ini ?");
+        }
+    </script>
 @endsection
