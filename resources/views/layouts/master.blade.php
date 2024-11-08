@@ -10,10 +10,11 @@
 
 <body>
     <div class="main-wrapper main-wrapper-1">
-        <div class="navbar-bg">asdas</div>
-        {{-- @include('includes.header')
-        @include('includes.sidebar') --}}
-
+        <div class="p-10">
+            <div class="text-center">
+                <h1 class="text-5xl font-bold">Laravel Test Book</h1>
+            </div>
+        </div>
         <!-- Main Content -->
         <div class="main-content">
             <section class="section" style="z-index: auto">
