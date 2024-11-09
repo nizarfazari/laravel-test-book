@@ -40,7 +40,7 @@
                                 @forelse ($books as $book)
                                     <tr class="hover:bg-gray-100">
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                            {{ $book->id }}</td>
+                                            {{ $loop->iteration + ($books->currentPage() - 1) * $books->perPage() }}</td>
                                         <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                             {{ $book->title }}</td>
                                         <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
