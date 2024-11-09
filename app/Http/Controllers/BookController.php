@@ -75,12 +75,13 @@ class BookController extends Controller
     }
     public function destroy($id)
     {
-        $book = Book::findOrFail($id);
-    
-        if ($book->delete()) {
-            return redirect()->route('book.index')->with('success', 'Book has been successfully deleted.');
+        try {
+            $book = Book::findOrFail($id);
+            $book->delete(); 
+            return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+
+            return response()->json(['success' => false, 'message' => $e->getMessage()]);
         }
-    
-        return redirect()->route('book.index')->with('error', 'Failed to delete the book.');
     }
 }

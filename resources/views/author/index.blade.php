@@ -3,7 +3,21 @@
 
 @section('content')
     <div class="section-body container mx-auto mt-5">
-      
+
+
+        @if (session('success'))
+            <div class="bg-green-500 text-white px-4 py-3 rounded-md mb-4">
+                {{ session('success') }}
+            </div>
+        @endif
+        @if (session('error'))
+            <div class="bg-red-500 text-white px-4 py-3 rounded-md mb-4">
+                {{ session('error') }}
+            </div>
+        @endif
+
+
+
         <div class="flex justify-between items-center bg-blue-600 p-5 rounded-md text-white shadow-lg mb-5">
             <div>
                 <h1 class="text-xl font-semibold">Authors ({{ $authors->count() }})</h1>
@@ -15,7 +29,7 @@
             </div>
         </div>
 
-      
+
         <div class="flex flex-col">
             <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
@@ -36,7 +50,8 @@
                                 @forelse ($authors as $author)
                                     <tr class="hover:bg-gray-100">
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                            {{ $loop->iteration + ($authors->currentPage() - 1) * $authors->perPage() }}</td>
+                                            {{ $loop->iteration + ($authors->currentPage() - 1) * $authors->perPage() }}
+                                        </td>
                                         <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                             {{ $author->name ?? 'Unknown Author' }}</td>
                                         <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
@@ -47,14 +62,8 @@
                                                 class="px-5 py-2 bg-yellow-500 rounded-md text-white text-lg shadow-md hover:bg-yellow-600 transition">Edit</a>
                                         </td>
                                         <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                            <form action="{{ route('author.destroy', ['author' => $author->id]) }}"
-                                                onsubmit="return confirmDelete()"
-                                                method="POST" class="inline">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit"
-                                                    class="px-5 py-2 bg-red-500 rounded-md text-white text-lg shadow-md hover:bg-red-600 transition">Delete</button>
-                                            </form>
+                                            <button onclick="deleteAuthor({{ $author->id }})"
+                                                class="px-5 py-2 bg-red-500 rounded-md text-white text-lg shadow-md hover:bg-red-600 transition">Delete</button>
                                         </td>
                                     </tr>
                                 @empty

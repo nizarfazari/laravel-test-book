@@ -66,13 +66,8 @@
                                                 class="px-5 py-2 bg-yellow-500 rounded-md text-white text-lg shadow-md hover:bg-yellow-600 transition">Edit</a>
                                         </td>
                                         <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                            <form action="{{ route('book.destroy', ['book' => $book->id]) }}"
-                                                method="POST" class="inline" onsubmit="return confirmDelete()">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit"
-                                                    class="px-5 py-2 bg-red-500 rounded-md text-white text-lg shadow-md hover:bg-red-600 transition">Delete</button>
-                                            </form>
+                                            <button onclick="deleteBook({{ $book->id }})"
+                                                class="px-5 py-2 bg-red-500 rounded-md text-white text-lg shadow-md hover:bg-red-600 transition">Delete</button>
                                         </td>
                                     </tr>
                                 @empty
@@ -93,9 +88,4 @@
         </div>
     </div>
 
-    <script>
-        function confirmDelete() {
-            return confirm("Apakah anda yakin akan menghapus buku ini ?");
-        }
-    </script>
 @endsection
