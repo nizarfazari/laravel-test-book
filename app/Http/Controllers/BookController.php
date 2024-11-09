@@ -77,8 +77,10 @@ class BookController extends Controller
     {
         $book = Book::findOrFail($id);
     
-        $book->delete();
+        if ($book->delete()) {
+            return redirect()->route('book.index')->with('success', 'Book has been successfully deleted.');
+        }
     
-        return redirect()->route('book.index')->with('success', 'Book deleted successfully.');
+        return redirect()->route('book.index')->with('error', 'Failed to delete the book.');
     }
 }

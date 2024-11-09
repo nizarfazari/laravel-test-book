@@ -53,10 +53,15 @@ class AuthorController extends Controller
     
     public function destroy($id)
     {
-        $book = Author::findOrFail($id);
+        $author = Author::findOrFail($id);
     
-        $book->delete();
+        if ($author->delete()) {
+            return redirect()->route('author.index')->with('success', 'Author deleted successfully.');
+        }
     
-        return redirect()->route('author.index')->with('success', 'Author deleted successfully.');
+        return redirect()->route('author.index')->with('error', 'Failed to delete author.');
+        
+    
+        
     }
 }

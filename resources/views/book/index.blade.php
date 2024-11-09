@@ -4,6 +4,17 @@
 @section('content')
     <div class="section-body container mx-auto mt-5">
 
+        @if (session('success'))
+            <div class="bg-green-500 text-white px-4 py-3 rounded-md mb-4">
+                {{ session('success') }}
+            </div>
+        @endif
+        @if (session('error'))
+            <div class="bg-red-500 text-white px-4 py-3 rounded-md mb-4">
+                {{ session('error') }}
+            </div>
+        @endif
+
         <div class="flex justify-between items-center bg-blue-600 p-5 rounded-md text-white shadow-lg mb-5">
             <div>
                 <h1 class="text-xl font-semibold">Books ({{ $books->count() }})</h1>
@@ -55,8 +66,8 @@
                                                 class="px-5 py-2 bg-yellow-500 rounded-md text-white text-lg shadow-md hover:bg-yellow-600 transition">Edit</a>
                                         </td>
                                         <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                            <form action="{{ route('book.destroy', ['book' => $book->id]) }}" method="POST"
-                                                class="inline" onsubmit="return confirmDelete()">
+                                            <form action="{{ route('book.destroy', ['book' => $book->id]) }}"
+                                                method="POST" class="inline" onsubmit="return confirmDelete()">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit"
